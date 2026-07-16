@@ -44,7 +44,7 @@ export default function Satisfacao() {
     if (!nota) { showToast("Selecione uma nota antes de enviar", "alert"); return; }
     setEnviando(true);
     try {
-      await enviarAvaliacao({cliente: cliente.dadosCadastrais.nome, nota, mensagem: mensagem.trim(), codigoProvedor: provider.codigo, rota:"servico" });
+      await enviarAvaliacao({cliente: cliente.dadosCadastrais.nome, nota, mensagem: mensagem.trim(), codigoProvedor: provider.codigo, rota:"servicos" });
       setEnviado(true);
     } catch {
       showToast("Não foi possível enviar. Tente novamente.", "alert");

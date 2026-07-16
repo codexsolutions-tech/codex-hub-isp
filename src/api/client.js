@@ -261,7 +261,7 @@ export async function enviarAvaliacao({cliente, nota, mensagem, codigoProvedor, 
     await new Promise((r) => setTimeout(r, 600));
     return { ok: true };
   }
-  const { data } = await request(`/provedores/avaliacao/${rota}`, {
+  const { data } = await request(`/provedores/avaliacao/${rota}/me`, {
     method: "POST",
     body: JSON.stringify({cliente, nota, mensagem, codigo_provedor_fk: codigoProvedor }),
   });
