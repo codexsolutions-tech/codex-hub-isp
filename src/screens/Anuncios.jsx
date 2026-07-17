@@ -25,12 +25,35 @@ export default function Anuncios({ items = [], onOpen }) {
     );
 
   const getImage = (item) =>
+    resolveImageUrl(
     item.link_imagem ||
     item.imagem ||
     item.image ||
     item.banner ||
     item.urlImagem ||
-    item.imagemUrl;
+    item.imagemUrl
+  );
+
+
+  // Converte links do Google Drive em URL de imagem direta
+const resolveImageUrl = (url) => {
+  if (!url || typeof url !== "string") return url;
+
+  // Extrai o ID do arquivo dos formatos mais comuns do Drive
+  const match =
+    url.match(/\/file\/d\/([^/]+)/) ||     // .../file/d/ID/view
+    url.match(/[?&]id=([^&]+)/) ||          // ...?id=ID  /  open?id=ID
+    url.match(/\/d\/([^/]+)/);             // .../d/ID
+
+  if (match && url.includes("drive.google.com")) {
+    const id = match[1];
+    // thumbnail é o endpoint mais confiável para embutir imagem
+    return `https://drive.google.com/thumbnail?id=${id}&sz=w1600`;
+    // alternativa: return `https://lh3.googleusercontent.com/d/${id}=w1600`;
+  }
+
+  return url; // não é Drive: retorna como está
+};
 
   return (
     <div>
