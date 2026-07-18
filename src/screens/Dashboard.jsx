@@ -32,14 +32,15 @@ export default function Dashboard() {
   const statuscontrato = cliente.isBloqueado ? "Bloqueado" : "Ativo";
   const plano = cliente.plano[0];
   const { consumos } = cliente;
-  const chartData = consumos.consumoMensalLabels.map((l, i) => ({
+  
+  const chartData = consumos.consumoMensalLabels.length > 0 ? consumos.consumoMensalLabels.map((l, i) => ({
     mes: mesAbrev(l),
     down: consumos.consumoMensalDown[i],
     up: consumos.consumoMensalUp[i],
-  }));
+  })) :  [];
   const idx = consumos.consumoMensalDown.length - 1;
-  const downAtual = consumos.consumoMensalDown[idx];
-  const upAtual = consumos.consumoMensalUp[idx];
+  const downAtual = chartData.length > 0 ? consumos.consumoMensalDown[idx] : 0;
+  const upAtual = chartData.length > 0 ? consumos.consumoMensalUp[idx] : 0;
 
   const [banners, setBanners] = useState([]);
   const [anuncios, setAnuncios] = useState([]);
@@ -138,7 +139,7 @@ const abrirOferta = (item) => {
       )}
 
       {/* consumo */}
-      <div style={card(t)}>
+      {chartData.length > 0 ? <div style={card(t)}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
           <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 700, fontSize: 15, color: t.text }}>Consumo mensal</div>
           <span style={{ fontSize: 11.5, color: t.sub }}>em GB</span>
@@ -147,7 +148,7 @@ const abrirOferta = (item) => {
           <Legend color={A} label="Download" />
           <Legend color={provider.accent2} label="Upload" />
         </div>
-        {chartData[0].down > 0 && <div style={{ height: 170, marginLeft: -8 }}>
+        { chartData[0].down > 0 && <div style={{ height: 170, marginLeft: -8 }}>
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData} margin={{ top: 8, right: 8, bottom: 0, left: 0 }}>
               <defs>
@@ -173,7 +174,7 @@ const abrirOferta = (item) => {
             </AreaChart>
           </ResponsiveContainer>
         </div>}
-      </div>
+      </div> : null}
 
       {/* Banner anuncios*/}
       <Anuncios
