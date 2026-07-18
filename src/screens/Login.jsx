@@ -101,9 +101,9 @@ export default function Login() {
           {loading ? <RefreshCw size={18} className="spin" /> : <>Entrar <ArrowRight size={18} /></>}
         </button>
 
-         <button onClick={() => setDoc("116.324.333-70")} style={{ marginTop: 16, background: "none", border: "none", color: A, fontWeight: 600, fontSize: 13, cursor: "pointer" }}>
+        {/*  <button onClick={() => setDoc("116.324.333-70")} style={{ marginTop: 16, background: "none", border: "none", color: A, fontWeight: 600, fontSize: 13, cursor: "pointer" }}>
           Usar CPF de demonstração
-        </button> 
+        </button>  */}
 
         <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: 8, justifyContent: "center", color: t.sub, fontSize: 11.5 }}>
           <ShieldCheck size={14} color={A} /> Conexão segura · seus dados protegidos
