@@ -68,3 +68,22 @@ export const docValido = (v) => [11, 14].includes(soDigitos(v).length);
 // abrevia "07/2026" -> "Jul"
 const MESES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 export const mesAbrev = (label) => MESES[Number(label.split("/")[0]) - 1] || label;
+
+export const resolveImageUrl = (url) => {
+  if (!url || typeof url !== "string") return url;
+
+  // Extrai o ID do arquivo dos formatos mais comuns do Drive
+  const match =
+    url.match(/\/file\/d\/([^/]+)/) ||     // .../file/d/ID/view
+    url.match(/[?&]id=([^&]+)/) ||          // ...?id=ID  /  open?id=ID
+    url.match(/\/d\/([^/]+)/);             // .../d/ID
+
+  if (match && url.includes("drive.google.com")) {
+    const id = match[1];
+    // thumbnail é o endpoint mais confiável para embutir imagem
+    return `https://drive.google.com/thumbnail?id=${id}&sz=w2048`;
+    // alternativa: return `https://lh3.googleusercontent.com/d/${id}=w1600`;
+  }
+
+  return url; // não é Drive: retorna como está
+};

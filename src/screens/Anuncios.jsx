@@ -3,6 +3,7 @@ import { ChevronRight, Megaphone } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { card } from "../components/ui/styles";
 import { hexA } from "../theme/tokens";
+import { resolveImageUrl } from "../utils/format";
 
 export default function Anuncios({ items = [], onOpen }) {
   const { A, provider, t } = useTheme();
@@ -36,7 +37,7 @@ export default function Anuncios({ items = [], onOpen }) {
 
 
   // Converte links do Google Drive em URL de imagem direta
-const resolveImageUrl = (url) => {
+/* const resolveImageUrl = (url) => {
   if (!url || typeof url !== "string") return url;
 
   // Extrai o ID do arquivo dos formatos mais comuns do Drive
@@ -53,7 +54,7 @@ const resolveImageUrl = (url) => {
   }
 
   return url; // não é Drive: retorna como está
-};
+}; */
 
   return (
     <div>

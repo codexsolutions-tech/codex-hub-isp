@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, AlertCircle, RefreshCw, ShieldCheck } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/AuthContext";
-import { maskCpfCnpj, docValido, iniciais } from "../utils/format";
+import { maskCpfCnpj, docValido, iniciais, resolveImageUrl } from "../utils/format";
 import { inputStyle, btnPrimary, errStyle } from "../components/ui/styles";
 
 export default function Login() {
@@ -55,7 +55,7 @@ export default function Login() {
 >
   {provider.logo_url ? (
     <img
-      src={provider.logo_url}
+      src={resolveImageUrl(provider.logo_url)}
       alt={provider.nome}
       style={{
         width: "100%",
@@ -101,9 +101,9 @@ export default function Login() {
           {loading ? <RefreshCw size={18} className="spin" /> : <>Entrar <ArrowRight size={18} /></>}
         </button>
 
-        {/*  <button onClick={() => setDoc("116.324.333-70")} style={{ marginTop: 16, background: "none", border: "none", color: A, fontWeight: 600, fontSize: 13, cursor: "pointer" }}>
+         {/*  <button onClick={() => setDoc("116.324.333-70")} style={{ marginTop: 16, background: "none", border: "none", color: A, fontWeight: 600, fontSize: 13, cursor: "pointer" }}>
           Usar CPF de demonstração
-        </button>  */}
+        </button>   */}
 
         <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: 8, justifyContent: "center", color: t.sub, fontSize: 11.5 }}>
           <ShieldCheck size={14} color={A} /> Conexão segura · seus dados protegidos
