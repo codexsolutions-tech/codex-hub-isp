@@ -3,7 +3,7 @@ import { Bell, Settings } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
 import { useToast } from "../../context/ToastContext";
-import { iniciais, primeiroNome } from "../../utils/format";
+import { iniciais, primeiroNome, resolveImageUrl } from "../../utils/format";
 import { iconBtn } from "../ui/styles";
 
 const TITULOS = {
@@ -43,18 +43,28 @@ export default function Header() {
           }}
         >
           {provider.logo_url ? (
-            <img
-              src={provider.logo_url}
-              alt="Logo do provedor"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-              }}
-              onError={(e) => {
-                e.currentTarget.src = "/logo-default.png";
-              }}
-            />
+           <>
+      <img
+        src={resolveImageUrl(provider.logo_url)}
+        alt={provider.nome}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+        }}
+        
+        onError={(e) => {
+          <span
+          style={{
+            fontSize: 34,
+            color: "#fff",
+          }}
+          >
+        {iniciais(provider.nome)}
+      </span>// opcional
+        }}
+        />
+    </>
           ) : (
             <span style={{ color: "#fff", fontSize: 20 }}>{iniciais(provider.nome)}</span>
           )}
