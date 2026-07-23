@@ -3,7 +3,7 @@ import { MOCK_CLIENTE, MOCK_CHAMADOS, MOCK_CONTRATOS } from "../data/mockCliente
 import { MOCK_BANNERS, MOCK_PARCERIAS } from "../data/marketing";
 import { soDigitos } from "../utils/format";
 
-const BASE = import.meta.env.DEV ? import.meta.env.VITE_API_URL_NET : import.meta.env.VITE_API_URL;
+const BASE = import.meta.env.PROD ? import.meta.env.VITE_API_URL_NET : import.meta.env.VITE_API_URL;
 const USE_MOCK = String(import.meta.env.VITE_USE_MOCK ?? "true") === "true";
 const MOCK_MULTICONTRATO = String(import.meta.env.VITE_MOCK_MULTICONTRATO ?? "true") === "true";
 
